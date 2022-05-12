@@ -1,0 +1,72 @@
+Quelle: https://www.youtube.com/watch?v=tLtN6tb1V4M
+---------------------------------------------------
+
+Docker:
+--------
+Docker ist ein Tool, das wir verwenden, um die Software, die wir in der Cloud laufen lassen wollen, zu verpacken und betreiben.
+
+* Sicherstellen, dass Docker läuft:
+sudo service docker start
+** Alternative Befehle
+sudo service docker status
+sudo service docker start
+sudo service docker restart
+sudo service docker stop
+
+
+* Starten eines Containers
+docker run postgres
+
+* Laufende postgres-Prozesse auf der Machine
+ps ax | grep postgres
+
+
+* Image = Dateien + Metadaten
+** Metadaten des Images ansehen mit (Ergebnis ist eine JSON-Datei mit allen Metadaten)
+*** CMD in diesen Metadaten ist z.B. sehr wichtig
+**** Welche Kommandos werden ausgeführt, wenn ein Container gestartet wird.
+*** docker inspect nginx 
+
+* Wie erstellt man sein eigenes Image?
+** Source Code Management > Build Server > Docker Registry ("Hub") > Produktion
+** Dateien erstellen (einschließlich einer Dockerfile)
+*** In dem jeweiligen Ordner, wo die Dateien liegen
+**** docker build .
+***** damit wird ein Image ohne Namen mit einer ImageId erstellt, z.B. deeda0473076
+****** Um alle Images aufzulisten:
+******* docker images 
+***** Name für Image, während das Image erstellt wird:
+****** docker build -t my-nginx:1 .
+******* Damit hat man ein Image namens my-nginx
+******** Image starten
+********* docker run my-nginx:1
+
+
+* Docker-Befehle
+** docker ps  : welche Container laufen gerade
+*** alle Container mit Ihrer Container-ID
+** Container anhalten
+*** docker stop [Container-ID]
+**** Beendeter Container ist aber immernoch lokal vorhanden:
+***** docker ps -a : auch angehaltene Container auflisten
+****** Man könnte die Container, die angehalten sind, wieder starten:
+******* docker start [Container-ID]
+** Container entfernen
+** docker rm [Container-ID]
+** Container anhalten und anschließend entfernen
+** docker rm -f [Container-ID]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
