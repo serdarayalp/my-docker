@@ -14,7 +14,7 @@ sudo service docker restart
 sudo service docker stop
 
 
-* Starten eines Containers
+* Starten eines Containers. Wenn der Container nicht gefunden werden kann, wird der Container aus hub.docker.com automatisch heruntergeladen.
 docker run postgres
 
 * Laufende postgres-Prozesse auf der Machine
@@ -28,15 +28,25 @@ ps ax | grep postgres
 *** docker inspect nginx 
 
 * Wie erstellt man sein eigenes Image?
-** Source Code Management > Build Server > Docker Registry ("Hub") > Produktion
-** Dateien erstellen (einschließlich einer Dockerfile)
+** Source Code Management (z.B. Gitlab) > Build Server > Docker Registry ("Hub") > Produktion
+** Dateien erstellen (einschließlich einer Dockerfile), z.B. eine index.html und Dockerfile
+
+Dockerfile
+-------------------------------------
+FROM ubuntu:18.04
+RUN apt-get update
+RUN apt-get install -y nginx
+ENV MEINE_UMGEBUNGSVARIABLE=123
+ADD index.html /var/www/html
+CMD nginx -g 'daemon off;'
+
 *** In dem jeweiligen Ordner, wo die Dateien liegen
 **** docker build .
 ***** damit wird ein Image ohne Namen mit einer ImageId erstellt, z.B. deeda0473076
 ****** Um alle Images aufzulisten:
 ******* docker images 
 ***** Name für Image, während das Image erstellt wird:
-****** docker build -t my-nginx:1 .
+****** docker build -t my-nginx:1 .   (t = target)
 ******* Damit hat man ein Image namens my-nginx
 ******** Image starten
 ********* docker run my-nginx:1
@@ -56,14 +66,25 @@ ps ax | grep postgres
 ** Container anhalten und anschließend entfernen
 ** docker rm -f [Container-ID]
 
+* Docker Registry
+** Docker Registry über Hub installieren lassen, hier in der Version 2
+*** docker run -d -p 5000:5000 registry:2
+**** Testen, ob die Verbindung steht
+***** curl localhost:5000 -v
+** Um nun die lokal erstelle Images zu Registry hochzuladen:
+*** Wir geben unserem lokal erstellten Image einen neuen Namen
+**** docker tag my-nginx:1 localhost:5000/my-nginx:1
+***** Hier ist [localhost:5000] also als Name des Registries zu denken.
+***** Damit ist unser Image auch über einen anderen Namen erreichbar.
+****** Das sieht man auch unter "docker images"
+*** dann pushen
+**** docker push localhost:5000/my-nginx:1 
+**** Um nun alles zu testen, lösche zuerst lokal vorhandene Images my-nginx:1 und localhost:5000/my-nginx:1
+***** docker rmi my-nginx:1 
+***** docker rmi localhost:5000/my-nginx:1
 
-
-
-
-
-
-
-
+* Image aus dem Docker Registry zum Produktion-Server ziehen und starten
+** docker run -p 80:80 localhost:5000/my-nginx:1
 
 
 
