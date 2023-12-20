@@ -64,6 +64,9 @@ in diesem Sinne das Gleiche:
 
 `sudo docker run -d --name webserver -p 3000:80 -v [ABSOLUTES_PFAD_IN_HOST]:/usr/share/nginx/html nginx`
 
+## Starten eines Containers mit der Image-ID
+`sudo docker run -d -p 3000:3000 -e MESSAGE = 'Das ist ein Test...' [IMAGE-ID]`
+
 ## Auflisten aller Containers, die gerade ausgeführt werden. 
 `sudo docker ps`
 
@@ -84,25 +87,25 @@ oder
 
 `sudo docker logs -f [NAME oder ID des Containers]`
 
-# Beenden eines Containers (Graceful Shutdown)
+## Beenden eines Containers (Graceful Shutdown)
 
 `sudo docker stop [NAME des Containers]`
 
 `sudo docker stop webserver`
 
-# Beenden eines Containers (NOT Graceful Shutdown)
+## Beenden eines Containers (NOT Graceful Shutdown)
 
 `sudo docker kill [NAME des Containers]`
 
 `sudo docker kill webserver`
 
-# Löschen eines beendeten Containers
+## Löschen eines beendeten Containers
 
 `sudo docker rm [NAME des Containers]`
 
 `sudo docker rm webserver`
 
-# Löschen eines Images
+## Löschen eines Images
 
 `sudo docker rmi [NAME des Images]`
 
@@ -114,7 +117,7 @@ Ubuntu-Image mit einer bestimmten Version entfernen
 
 `sudo docker rmi ubuntu:20.04`
 
-# Komplettes System-Reinigung
+## Komplettes System-Reinigung
 `sudo docker system prune --all --volumes`
 
 Damit werden die folgenden entfernt:
@@ -122,3 +125,27 @@ Damit werden die folgenden entfernt:
 * alle Netzwerke, die von keinem Container verwendet werden.
 * alle Volumes (virtuellen Dateisysteme mit _--volumes_), die von keinem Container verwendet werden.
 * alle Images mit keinem Container
+
+## Erstellen eines Docker-Images
+
+`sudo docker build .`
+
+**Punkt (.) oben zeigt den Ordner, indem die Dockerfile befindet.** 
+
+Mit diesem Befehl wird ein Image erstellt, das keinen Namen (Repository) und keine Version-Nummer (TAG) hat. 
+
+## Erstellen eines Docker-Images mit Name und Tag
+`sudo docker build -t ddd-docker:latest .`
+
+## Taggen eines bestehenden Images unter einem anderen Tag (Version-Nummer)
+`sudo docker tag ddd-docker:latest ddd-docker:1.0.0`
+
+
+## Pushen auf DockerHub
+`sudo docker push ddd-docker:latest`
+
+So kann man aber nicht aus DockerHub pushen, weil es für normale User nicht möglich ist ohne **Namespace** zu pushen. Stattdessen zuerst mit Namespace taggen und dann pushen:
+
+`sudo docker tag ddd-docker:latest serdarayalp/ddd-docker:latest`
+
+
