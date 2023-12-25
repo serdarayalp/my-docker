@@ -272,3 +272,66 @@ Dieses Verhalten ist aber unter Umständen nicht wünschenswert.
 oder direkt aus Docker selbst
 
 `docker compose --version`
+
+**Auflisten von Containern per docker-compose**
+
+`docker-compose ps`
+
+**Beenden von Containern per docker-compose**
+
+`docker-compose kill`
+
+`docker-compose stop`
+
+**Beenden aller Containern per docker-compose und löschen von Netzwerken**
+
+`docker-compose down`
+
+**Beenden aller Containern per docker-compose und löschen von Netzwerken und Volumes**
+
+`docker-compose down --volumes`
+
+**Zeige die Docker-Compose-Konfiguration**
+
+`docker-compose config`
+
+**Starte die Container mit einer Profile**
+
+Mit folgendem Befehl wird der Container mit diesem Namen gestartet. Alle Container, die keinen ProfileName haben werden aber auch gestartet.
+
+docker-compose --profile [PROFILE_NAME] up
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
