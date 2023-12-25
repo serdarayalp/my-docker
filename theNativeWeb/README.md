@@ -5,8 +5,6 @@ Quelle: https://www.youtube.com/watch?v=DESdVoKhIxY&t=3437s
 `docker version`
 
 ## Ein bestimmtes Image herunterladen
-[sudo] docker pull [Name des Images]
-
 `docker pull ubuntu`
 
 Damit wird die letzte Version des Images (latest) heruntergeladen.
