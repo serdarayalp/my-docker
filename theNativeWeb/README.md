@@ -23,12 +23,12 @@ Hier ist die Anwendung _bash_ innerhalb des Images _ubuntu_ im iterativen Mode (
 Von einem Image kann mehrere Container erstellt werden, im Sinne von mehreren Prozessen, die 
 voneinander isoliert arbeiten.
 
-Man kann auch bash einer bestimmten Ubuntu-Version starten. Wenn dieses Image nicht vorhanden ist,
+Man kann auch _bash_ einer bestimmten Ubuntu-Version starten. Wenn dieses Image nicht vorhanden ist,
 wird es automatisch heruntergeladen.
 
 `docker run -it ubuntu:21.10 bash`
 
-nginx im iterativen Mode starten. Gibt man nach Image und Version keinen Prozessnamen, startet
+_nginx_ im iterativen Mode starten. Gibt man nach Image und Version keinen Prozessnamen, startet
 man damit den sogenannte _Standard-Prozess_. Die folgenden Befehle machen 
 in diesem Sinne das Gleiche:
 
@@ -36,7 +36,7 @@ in diesem Sinne das Gleiche:
 
 `docker run -it nginx:1.21.4 nginx`
 
-**nginx im detach-Mode (_-d_) starten.**
+**_nginx_ im detach-Mode (_-d_) starten.**
 
 `docker run -d nginx:1.21.4`
 
@@ -71,7 +71,7 @@ in diesem Sinne das Gleiche:
 ## Auflisten ALLER (_-a_) Containers, die gerade ausgeführt werden oder schon beendet wurden-
 `docker ps -a`
 
-Jeder Container, der ausgeführt wird, bekommt einen zufälligen Namen zugeordnet.
+Jeder Container, der ausgeführt wird, bekommt einen zufälligen Namen zugeordnet, es sei denn man vergibt einen bestimmten Namen mit dem _name_-Parameter.
 
 ## Auslesen der Logs eines Prozesses oder Containers
 `docker logs [NAME oder ID des Containers]`
@@ -142,7 +142,7 @@ Mit diesem Befehl wird ein Image erstellt, das keinen Namen (Repository) und kei
 ## Pushen auf DockerHub
 `docker push ddd-docker:latest`
 
-So kann man aber nicht aus DockerHub pushen, weil es für normale User nicht möglich ist ohne **Namespace** zu pushen. Stattdessen zuerst mit Namespace taggen und dann pushen:
+So kann man aber nicht auf DockerHub pushen, weil es für normale User nicht möglich ist ohne **Namespace** zu pushen. Stattdessen zuerst mit Namespace taggen und dann pushen:
 
 `docker tag ddd-docker:latest serdarayalp/ddd-docker:latest`
 
