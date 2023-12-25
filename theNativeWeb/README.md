@@ -263,3 +263,12 @@ Dieses Verhalten ist aber unter Umständen nicht wünschenswert.
 
 `docker run --network test ...`
 
+# Docker Compose
+
+**Version ausgeben**
+
+`docker-compose --version` 
+
+oder direkt aus Docker selbst
+
+`docker compose --version`
